@@ -35,9 +35,7 @@ def menu():
             if continueProgram() != True: break
 
         elif choice == 3:
-            #Update employee
-            print("Entered update employee")
-            
+            #Update employee            
             updateEmployee.updateEmployee()
 
             if continueProgram() != True: break

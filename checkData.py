@@ -1,53 +1,60 @@
 import re
+import exception
 
 #Exception handling functions
 def checkID(df):
     while True:
-        id = input("Enter the employee ID (between 100 and 999): ")
-        if not id.isdigit():
+        try:
+            id = input("Enter the employee ID (between 100 and 999): ")
+
+            if int(id) not in df.index:
+                if int(id) in range(100,1000):
+                    return id
+                else: print("You entered a value out of bound!")
+            else: print("This value already exists in the file! Please try again.")
+        except ValueError:
             print("You did not enter a numerical value! Please try again.")
-            continue
 
-        if int(id) not in df.index:
-            if int(id) in range(100,1000):
-                break
-            else: print("You entered a value out of bound!")
-        else: print("This value already exists in the file! Please try again.")
-
-    return id
 
 def checkFirstName(df):
     while True:
-        name = input("Enter the first name: ")
-        if name.isalpha():
+        try:
+            name = input("Enter the first name: ")
+            if not name.isalpha():
+                raise exception.NonAlphabeticNameErrror()
             if name not in df['First Name'].values:
-                break
+                return name
             else: print("Name already exists! Please try again.")
-        else: print("Enter only alphabetic values!")
+        except exception.NonAlphabeticNameErrror as e:
+            print(e)
             
-    return name
+    
 
 def checkLastName(df):
     while True:
-        name = input("Enter the last name: ")
-        if name.isalpha():
+        try:
+            name = input("Enter the last name: ")
+            if not name.isalpha():
+                raise exception.NonAlphabeticNameErrror()
             if name not in df['Last Name'].values:
-                break
+                return name
             else: print("Name already exists! Please try again.")
-        else: print("Enter only alphabetic values!")
+        except exception.NonAlphabeticNameErrror as e:
+            print(e)
             
-    return name
 
 def checkDate():
     while True:
-        date = input("Enter the date (MM-DD-YYY): ")
-        pattern = r'^(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])-(199\d|20[01234]\d)$'
+        try:
+            date = input("Enter the date (MM-DD-YYY): ")
+            pattern = r'^(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])-(199\d|20[01234]\d)$'
 
-        if re.match(pattern, date):
-            return date
-        else:
-            print("Please reenter in the correct format!")
-            continue
+            if re.match(pattern, date):
+                return date
+            else:
+                raise exception.InvalidDateFormat()
+        except exception.InvalidDateFormat as e:
+            print(e)
 
 def checkSalary():
     while True:
