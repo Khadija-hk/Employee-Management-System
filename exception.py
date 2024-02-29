@@ -1,4 +1,5 @@
-#Writing Custom Exception Classes
+'''This file contains the custom exception classes defined by the user'''
+
 '''This class checks if the entered string contains only alphabetic values'''
 class NonAlphabeticNameErrror(Exception):
     def __init__(self, message = "Enter only aplhabetic values!"):

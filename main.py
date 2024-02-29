@@ -1,15 +1,20 @@
-# Add the file name input - user should enter the file name
-# add checking for the continue function
+'''This file contains the main program where the execution starts'''
+
+#Import the necessary files and libraries
 import Employee
 import addEmployee
 import removeEmployee
 import updateEmployee
 
+
+'''Function to check if the user wishes to continue using the program'''
 def continueProgram():
     ans = input("\n Do you wish to continue? (Y/N): ")
     if ans.lower() == 'y': return True
     else: return False
 
+
+'''Function to display the menu and call the necessary functions'''
 def menu():
     while True:
         print("\n Welcome to Employee Management System!")
@@ -55,6 +60,6 @@ def menu():
             print("\n Wrong choice! Enter again")
 
 
-
+#Start the execution of the program
 if __name__ == "__main__":
     menu()
